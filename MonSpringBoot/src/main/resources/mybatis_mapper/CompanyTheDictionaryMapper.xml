@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fv.dao.CompanyTheDictionaryDao" >
+<resultMap id="CompanyTheDictionaryBaseResultMap" type="fv.model.CompanyTheDictionary" >
+	<id column="id" property="id" jdbcType="BIGINT" />
+	<result column="name" property="name" jdbcType="VARCHAR" />
+	<result column="value" property="value" jdbcType="BIGINT" />
+	<result column="inddex" property="inddex" jdbcType="BIGINT" />
+	<result column="type" property="type" jdbcType="BIGINT" />
+	<result column="department" property="department" jdbcType="VARCHAR" />
+	<result column="typechild" property="typechild" jdbcType="BIGINT" />
+	<result column="description" property="description" jdbcType="VARCHAR" />
+	<result column="ｍember" property="member" jdbcType="VARCHAR" />
+	<result column="typedes" property="typedes" jdbcType="VARCHAR" />
+	<result column="isfreeze" property="isfreeze" jdbcType="BIGINT" />
+	<result column="theyear" property="theyear" jdbcType="BIGINT" />
+
+	<result column="creation_time" property="creationTime" jdbcType="TIMESTAMP" />
+	<result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+	<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+	<result column="last_update_by" property="lastUpdateBy" jdbcType="VARCHAR" />
+
+
+    <result column="memberName" property="memberName" jdbcType="VARCHAR" />
+	<result column="depart" property="depart" jdbcType="VARCHAR" />
+	<result column="upname" property="upname" jdbcType="VARCHAR" />
+	<result column="createdbyname" property="createdbyname" jdbcType="VARCHAR" />
+	<result column="lastupdatebyname" property="lastupdatebyname" jdbcType="VARCHAR" />
+</resultMap>
+<select id="get" resultMap="CompanyTheDictionaryBaseResultMap" parameterType="java.lang.Long">
+	select 	 GROUP_CONCAT(ps.`name`) memberName,GROUP_CONCAT(ps.job_num) member,
+	dd.* ,d2.typedes upname
+	from company_thedic dd
+	LEFT JOIN company_thedic d2 on dd.type=d2.typechild
+	LEFT JOIN project_staff ps ON FIND_IN_SET(ps.job_num,dd.member)
+	where dd.id = #{value,jdbcType=BIGINT}
+	GROUP BY id
+
+</select>
+<select id="count" parameterType="fv.model.CompanyTheDictionary" resultType="java.lang.Integer">
+	select count(*) from company_thedic where 1=1
+</select>
+<select id="list" parameterType="fv.model.CompanyTheDictionary" resultMap="CompanyTheDictionaryBaseResultMap">
+	select * from company_thedic where 1=1
+</select>
+
+<delete id="delete" parameterType="fv.model.CompanyTheDictionary">
+	delete from company_thedic where 1=1
+	<trim>
+		<if test="id != null and id != ''"> and id = #{id,jdbcType=BIGINT} </if>
+		<if test="name != null and name != ''"> and name = #{name,jdbcType=VARCHAR} </if>
+		<if test="value != null and value != ''"> and value = #{value,jdbcType=BIGINT} </if>
+	</trim>
+</delete>
+<insert id="add" parameterType="fv.model.CompanyTheDictionary" useGeneratedKeys="true" keyProperty="id">
+	insert into company_thedic
+	<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="id != null">id,</if>
+		<if test="name != null">name,</if>
+		<if test="value != null">value,</if>
+		<if test="inddex != null">inddex,</if>
+		<if test="type != null">type,</if>
+		<if test="department != null">department,</if>
+		<if test="description != null">description,</if>
+		<if test="member != null">member,</if>
+		<if test="typedes != null">typedes,</if>
+		<if test="typechild != null">typechild,</if>
+		<if test="isfreeze != null">isfreeze,</if>
+		<if test="theyear != null">theyear,</if>
+
+		<if test="creationTime != null">creation_time,</if>
+		<if test="createdBy != null">created_by,</if>
+		<if test="lastUpdateTime != null">last_update_time,</if>
+		<if test="lastUpdateBy != null">last_update_by,</if>
+
+	</trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">#{id,jdbcType=BIGINT},</if>
+		<if test="name != null">#{name,jdbcType=VARCHAR},</if>
+		<if test="value != null">#{value,jdbcType=BIGINT},</if>
+		<if test="inddex != null">#{inddex,jdbcType=BIGINT},</if>
+		<if test="type != null">#{type,jdbcType=BIGINT},</if>
+		<if test="department != null">#{department,jdbcType=VARCHAR},</if>
+		<if test="description != null">#{description,jdbcType=VARCHAR},</if>
+		<if test="member != null">#{member,jdbcType=VARCHAR},</if>
+		<if test="typedes != null">#{typedes,jdbcType=VARCHAR},</if>
+		<if test="typechild != null">#{typechild,jdbcType=BIGINT},</if>
+		<if test="isfreeze != null">#{isfreeze,jdbcType=BIGINT},</if>
+		<if test="theyear != null">#{theyear,jdbcType=BIGINT},</if>
+
+		<if test="creationTime != null">#{creationTime,jdbcType=TIMESTAMP},</if>
+		<if test="createdBy != null">#{createdBy,jdbcType=VARCHAR},</if>
+		<if test="lastUpdateTime != null">#{lastUpdateTime,jdbcType=TIMESTAMP},</if>
+		<if test="lastUpdateBy != null">#{lastUpdateBy,jdbcType=VARCHAR},</if>
+	</trim>
+</insert>
+<update id="update" parameterType="fv.model.CompanyTheDictionary">
+	update company_thedic
+	<set>
+		<if test="id != null"> id = #{id,jdbcType=BIGINT}, </if>
+		<if test="name != null"> name = #{name,jdbcType=VARCHAR}, </if>
+		<if test="value != null"> value = #{value,jdbcType=BIGINT}, </if>
+		<if test="inddex != null"> inddex = #{inddex,jdbcType=BIGINT}, </if>
+		<if test="type != null"> type = #{type,jdbcType=BIGINT}, </if>
+		<if test="department != null"> department = #{department,jdbcType=VARCHAR}, </if>
+		<if test="description != null"> description = #{description,jdbcType=VARCHAR}, </if>
+		<if test="member != null"> member = #{member,jdbcType=VARCHAR}, </if>
+		<if test="typedes != null"> typedes = #{typedes,jdbcType=VARCHAR}, </if>
+		<if test="typechild != null"> typechild = #{typechild,jdbcType=BIGINT}, </if>
+		<if test="isfreeze != null and (isfreeze ==0 or isfreeze ==1)"> isfreeze = 10*(IFNULL(isfreeze,0) DIV 10) +  #{isfreeze,jdbcType=BIGINT}, </if>
+		<if test="theyear != null"> theyear = #{theyear,jdbcType=BIGINT}, </if>
+
+		<if test="lastUpdateTime != null"> last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}, </if>
+		<if test="lastUpdateBy != null"> last_update_by = #{lastUpdateBy,jdbcType=VARCHAR}, </if>
+
+	</set>
+	where id = #{id,jdbcType=BIGINT}
+</update>
+
+
+<select id="getIdfromInsertType" parameterType="fv.model.CompanyTheDictionary">
+	INSERT INTO company_thedic(name,value,type,typedes,department,inddex)
+	SELECT "",Max(value)+1,#{type},typedes,#{department},#{inddex} FROM company_thedic
+	WHERE type = #{type} LIMIT 1 ;
+</select>
+<select id="getLastId" resultType="java.lang.Integer">
+	SELECT LAST_INSERT_ID();
+</select>
+
+<select id="getInitDataOrderbyDesc" parameterType="java.lang.Long" resultMap="CompanyTheDictionaryBaseResultMap">
+	select id, value, name, description ,typedes ,isfreeze
+	from company_thedic
+	where 1=1
+	and type =  #{type}
+	ORDER BY description;
+</select>
+
+
+<!-- 韩延鹏  搜索合作对象 -->
+<select id="getCompanyPartnersCount" parameterType="java.lang.String"  resultType="java.lang.Integer">
+	SELECT COUNT(*) FROM company_thedic ctd WHERE type=23 and name LIKE concat(concat('%',#{autNumber}),'%')
+</select>
+<select id="getCompanyPartnersList" parameterType="java.util.Map" resultMap="CompanyTheDictionaryBaseResultMap">
+	SELECT * FROM company_thedic ctd WHERE type=23 and name LIKE concat(concat('%',#{autNumber}),'%')
+	order by id desc limit #{start} ,#{length}
+</select>
+<!-- 韩延鹏  搜索合作对象 -->
+
+	<select id="serCompanyPartnersCount" parameterType="java.lang.String"  resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM company_thedic ctd WHERE (type=34 or TYPE = 40) and name LIKE concat(concat('%',#{autNumber}),'%')
+	</select>
+	<select id="serCompanyPartnersList" parameterType="java.util.Map" resultMap="CompanyTheDictionaryBaseResultMap">
+		SELECT * FROM company_thedic ctd WHERE (type=34 or TYPE = 40) and name LIKE concat(concat('%',#{autNumber}),'%')
+		order by id desc limit #{start} ,#{length}
+	</select>
+
+</mapper>
