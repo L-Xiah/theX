@@ -18,6 +18,11 @@ public class HomeController {
 
 
     @RequestMapping("/set")
+    public String getSet() {
+        return "/theK";
+    }
+
+    @RequestMapping("/theK")
     public String getTheK() {
         return "/theK";
     }
