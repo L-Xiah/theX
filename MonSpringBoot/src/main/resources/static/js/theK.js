@@ -1,15 +1,36 @@
 
 
 
+window.addEventListener('ajaxReadyStateChange', function (e) {
+    console.log( "----------ajaxReadyStateChange---------" + e.detail); // XMLHttpRequest Object
+});
+window.addEventListener('ajaxAbort', function (e) {
+    console.log("---------ajaxAbort---:" + e.detail.responseText); // XHR 返回的内容
+});
+window.addEventListener('ajaxLoadStart', function (e) {
+    console.log("---------ajaxLoadStart---:" + e.detail.responseText); // XHR 返回的内容
+});
+
+
+
 
 const key = Symbol("key");
 const $theK = $("#theK");
 let theK = {[key]:null};
 
-$theK.click(function () {
+$("#theEvent").on("click",function () {
+    console.log("----" + window);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'infoJson');
+    xhr.send();
+});
+
+
+$theK.on("click",function () {
+
     MyClass("theKey");
     const t1 = new Date();
-    var tCount = 0;
+    let tCount = 0;
     console.log("--------------" + $(this) + "= " + tCount + "--" + t1.Format("yyyy-MM-dd HH:mm:ss") +  "--"  + "--" + theK[key]);
     cook()
         .then(eat)
@@ -38,36 +59,33 @@ function MyClass(privateData) {
 //做饭
 function cook(){
     console.log('开始做饭。');
-    var p = new Promise(function(resolve, reject){        //做一些异步操作
-        setTimeout(function(){
-            console.log('做饭完毕！');
+    return new Promise(function (resolve, reject) {        //做一些异步操作
+        setTimeout(function () {
+            console.log('做饭完毕！' + reject );
             resolve('鸡蛋炒饭');
         }, 1000);
     });
-    return p;
 }
 
 //吃饭
 function eat(data){
     console.log('开始吃饭：' + data);
-    var p = new Promise(function(resolve, reject){        //做一些异步操作
-        setTimeout(function(){
-            console.log('吃饭完毕!');
+    return new Promise(function (resolve, reject) {        //做一些异步操作
+        setTimeout(function () {
+            console.log('吃饭完毕!' + reject);
             resolve('一块碗和一双筷子');
         }, 2000);
     });
-    return p;
 }
 
 function wash(data){
     console.log('开始洗碗：' + data);
-    var p = new Promise(function(resolve, reject){        //做一些异步操作
-        setTimeout(function(){
-            console.log('洗碗完毕!');
+    return new Promise(function (resolve, reject) {        //做一些异步操作
+        setTimeout(function () {
+            console.log('洗碗完毕!' + reject);
             resolve('干净的碗筷');
         }, 2000);
     });
-    return p;
 }
 
 
