@@ -8,7 +8,7 @@ public class HomeController {
 
     @RequestMapping("/index")
     public String index() {
-        return "index";
+        return "index";//通过mvc访问src/main/webapp路径下jsp文件（前面不加"/"）
     }
 
     @RequestMapping("/index1")

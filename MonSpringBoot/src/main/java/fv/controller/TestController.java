@@ -69,6 +69,11 @@ public class TestController {
     }
 
 
+    @RequestMapping(value = "infoJson",method = RequestMethod.GET)
+    @ResponseBody
+    public String infoJson(){
+        return "theTest...LLLL";
+    }
 
 
 
