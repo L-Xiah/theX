@@ -18,11 +18,23 @@ const key = Symbol("key");
 const $theK = $("#theK");
 let theK = {[key]:null};
 
+$("#theFile").on("click",function () {
+    console.log("--theFile-theFileSystemFunc-" + window);
+    theFileSystemFunc();
+
+});
+
 $("#theEvent").on("click",function () {
     console.log("----" + window);
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'infoJson');
     xhr.send();
+
+    // 引入上边的js后，就可以调用生成文本的方法 另外ie下会有中文乱码的问题
+    let blob = new Blob(["Hello, world!\t\n我是milo，你好啊"], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, "hello world.txt");
+
+
 });
 
 
