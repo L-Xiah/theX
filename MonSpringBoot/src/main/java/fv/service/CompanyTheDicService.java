@@ -1,7 +1,6 @@
 package fv.service;
 
 import fv.dao.CompanyTheDictionaryDao;
-import fv.mapper.CompanyTheDicMapper;
 import fv.model.CompanyTheDictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +10,12 @@ public class CompanyTheDicService {
 
 
     private final
-    CompanyTheDicMapper userMapper;
+    fv.mapper.CompanyTheDicMapper userMapper;
     private final
     fv.dao.CompanyTheDictionaryDao CompanyTheDictionaryDao;
 
     @Autowired
-    public CompanyTheDicService(CompanyTheDicMapper userMapper, CompanyTheDictionaryDao CompanyTheDictionaryDao) {
+    public CompanyTheDicService(fv.mapper.CompanyTheDicMapper userMapper, CompanyTheDictionaryDao CompanyTheDictionaryDao) {
         this.userMapper = userMapper;
         this.CompanyTheDictionaryDao = CompanyTheDictionaryDao;
     }
