@@ -19,7 +19,7 @@ public class HomeController {
 
     @RequestMapping("/set")
     public String getSet() {
-        return "/theK";
+        return "theK";
     }
 
     @RequestMapping("/theK")

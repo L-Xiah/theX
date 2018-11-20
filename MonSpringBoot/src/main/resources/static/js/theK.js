@@ -20,7 +20,12 @@ let theK = {[key]:null};
 
 $("#theFile").on("click",function () {
     console.log("--theFile-theFileSystemFunc-" + window);
-    theFileSystemFunc();
+    //theFileSystemFunc();
+    try{
+        window.location.href = "/Download";
+    }catch (e) {
+        console.log("---------下载失败！！！");
+    }
 
 });
 
