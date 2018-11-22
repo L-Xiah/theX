@@ -12,7 +12,7 @@ public class Application extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
+        return application.sources(Application.class);//部署到tomcat上需要
     }
 
     public static void main(String[] args) {
