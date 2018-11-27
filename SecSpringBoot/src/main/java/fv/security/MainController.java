@@ -23,12 +23,12 @@ public class MainController {
     @GetMapping("/")
     public String index(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String account, Model model) {
         model.addAttribute("name", account);
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "/login";
     }
 
     @PostMapping("/loginPost")
