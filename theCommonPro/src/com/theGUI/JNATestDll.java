@@ -1,4 +1,4 @@
-package com.company;
+package com.theGUI;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
