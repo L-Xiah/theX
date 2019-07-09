@@ -1,4 +1,4 @@
-package com.theProgram;
+package com.theInterface;
 
 public class CframeE<E> implements IframeE<E> {
 

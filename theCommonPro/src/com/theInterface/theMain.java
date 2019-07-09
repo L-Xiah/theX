@@ -1,4 +1,4 @@
-package com.theProgram;
+package com.theInterface;
 
 import java.util.HashMap;
 import java.util.Map;

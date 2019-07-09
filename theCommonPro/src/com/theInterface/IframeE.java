@@ -1,4 +1,4 @@
-package com.theProgram;
+package com.theInterface;
 
 public interface IframeE<E> {
 
