@@ -27,7 +27,7 @@
 
     <shiro.version>1.2.3</shiro.version>
 
-    <commons-io.version>2.4</commons-io.version>
+    <commons-io.version>2.7</commons-io.version>
     <commons-lang.version>2.6</commons-lang.version>
     <commons-lang3.version>3.4</commons-lang3.version>
 
